@@ -1,15 +1,19 @@
+
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-class Api{
+class ApiMoti {
 
-   getDataApi() async{
-
+  getDataMotiApi() async {
     var url = Uri.parse("https://playstore.citsolution.xyz/api/slider");
     var response = await http.get(url);
-    //print("Status Code: ${jsonDecode(response.body)}");
-    return jsonDecode(response.body);
+
+    //print("=================${response.body}============");
+
+   return jsonDecode(response.body);
 
   }
+
+
 }

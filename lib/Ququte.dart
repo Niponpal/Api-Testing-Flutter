@@ -51,7 +51,7 @@ class _QuquteScreenViewState extends State<QuquteScreenView> {
           InkWell(
               onTap: () async {
             var a =    await Api().getDataApi();
-               loadData();-m
+               loadData();
 
               },
               child: Icon(Icons.refresh_outlined,color: Colors.white,)),
