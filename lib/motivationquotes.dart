@@ -1,4 +1,5 @@
 import 'package:apitest/apimoti.dart';
+import 'package:apitest/nameListapi.dart';
 import 'package:flutter/material.dart';
 
 class MotivationquotesView extends StatefulWidget {
@@ -7,7 +8,7 @@ class MotivationquotesView extends StatefulWidget {
   @override
   State<MotivationquotesView> createState() => _MotivationquotesViewState();
 }
-
+bool isLoading = true;
 
 class _MotivationquotesViewState extends State<MotivationquotesView> {
   bool isloadings = true;
@@ -18,17 +19,16 @@ class _MotivationquotesViewState extends State<MotivationquotesView> {
 
   loadData() async {
     isloadings = true;
-    setState(() {});
 
-    var a = await ApiMoti().getDataMotiApi();
+    var a = await NameApi().getNameApi();
 
-    motiDatas =a['data'];
+    motiDatas = a['data'];
     setState(() {});
   }
 
   @override
   void initState() {
-    super.initState();  // <-- API call এখানে হবে
+    super.initState();
   loadData();
   }
 
@@ -70,7 +70,7 @@ class _MotivationquotesViewState extends State<MotivationquotesView> {
                   ),
                 ),
               ),
-          
+
               ListView.builder(
                   shrinkWrap: true,
                   itemCount: motiDatas.length,
@@ -92,10 +92,10 @@ class _MotivationquotesViewState extends State<MotivationquotesView> {
                           ),
                         ),
                       ),
-          
+
                       Positioned(
-                          top: 40,
-                          left: 20,
+                        top: 40,
+                        left: 20,
                         child: Container(
                           width: 40,
                           height: 40,
@@ -104,7 +104,7 @@ class _MotivationquotesViewState extends State<MotivationquotesView> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10), 
+                            borderRadius: BorderRadius.circular(10),
                             child: Image.asset(
                               "assets/Qutaions.png",
                               width: 40,
@@ -117,7 +117,7 @@ class _MotivationquotesViewState extends State<MotivationquotesView> {
 
                       )
                     ],
-                  ))
+                  )),
           
           
             ],
