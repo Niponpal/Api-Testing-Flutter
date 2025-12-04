@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:apitest/quotaions/add_Screen.dart';
 import 'package:apitest/quotaions/getLoad.dart';
+import 'package:apitest/quotaions/quotations_deleted.dart';
 import 'package:flutter/material.dart';
 
 class QuotationsdataScreen extends StatefulWidget {
@@ -54,26 +55,45 @@ class _QuotationsdataScreenState extends State<QuotationsdataScreen> {
           ? Center(child: Text("Data Not Found"))
           : ListView.builder(
           itemCount: QuationsList.length,
-          itemBuilder: (context,i)=>Card(
-        elevation:3,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 28),
-          child: Column(
-            spacing: 8,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("${QuationsList[i]['quote']}",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w800),),
-              SizedBox(height: 10,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text("${QuationsList[i]['author']}",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w400,fontStyle: FontStyle.italic),)
-                ],
-              )
-            ],
-          ),
-        ),
-      )),
+          itemBuilder: (context,i)=>Dismissible(
+            // Must be Dismissible Button Use of Key
+            key: Key(QuationsList[i]['id'].toString()),
+            direction: DismissDirection.endToStart,
+
+
+            onDismissed: (direction)  {
+              setState(() { });
+              int deleteId = QuationsList[i]['id'];
+              QuotationsDelete.DeletedData(id: deleteId);
+
+              setState(() {
+                QuationsList.removeAt(i);
+              });
+
+            },
+
+            child: Card(
+                    elevation:3,
+                    child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 28),
+            child: Column(
+              spacing: 8,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("${QuationsList[i]['quote']}",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w800),),
+                SizedBox(height: 10,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text("${QuationsList[i]['author']}",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w400,fontStyle: FontStyle.italic),)
+                  ],
+                )
+              ],
+            ),
+                    ),
+                  ),
+          )),
+
       floatingActionButton:FloatingActionButton(onPressed: (){
         Navigator.push(context, MaterialPageRoute(builder: (context)=>AdDataScreen())).then((v){
           getDatas();
