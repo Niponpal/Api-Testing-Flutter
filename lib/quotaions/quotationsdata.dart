@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:apitest/quotaions/Quotaions_Updated.dart';
 import 'package:apitest/quotaions/add_Screen.dart';
 import 'package:apitest/quotaions/getLoad.dart';
 import 'package:apitest/quotaions/quotations_deleted.dart';
@@ -23,6 +24,8 @@ class _QuotationsdataScreenState extends State<QuotationsdataScreen> {
     var a = await ApiData().getApiLoad();
     QuationsList = a['data'];
     isLoading = false;
+
+
     setState(() {});
     log("$a");
   }
